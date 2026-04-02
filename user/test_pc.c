@@ -42,12 +42,12 @@ static void consumer(void *arg){
 int main(void){
   thread_init();
   mutex_init(&mu);
-
   tid_t p1 = thread_create(producer, (void*)1);
   tid_t p2 = thread_create(producer, (void*)2);
   tid_t c1 = thread_create(consumer, 0);
-  (void)p1; (void)p2; (void)c1;
-
-  printf(1, "test_pc: done (skeleton)\n");
+  thread_join(p1);
+  thread_join(p2);
+  thread_join(c1);
+  printf(1, "test_pc: done\n");
   exit();
 }
